@@ -26,8 +26,8 @@ router.post('/register', (req, res) => {
  * @apiName RegisterUser
  * @apiGroup Authentication
  * 
- * @apiParam {String} username username (required) 
- * @apiParam {String} password password (required)
+ * @apiParam {String} username username, needs to be unique.
+ * @apiParam {String} password password, required.
  * 
  * @apiSuccessExample successful response: 
  * http/1.1 201 Created
@@ -62,8 +62,8 @@ router.post('/login', (req, res) => {
  * @apiName LoginUser
  * @apiGroup Authentication
  * 
- * @apiParam {String} username username (required) 
- * @apiParam {String} password password (required)
+ * @apiParam {String} username username, needs to be unique.
+ * @apiParam {String} password password, required.
  * 
  * @apiSuccessExample successful response: 
  * http/1.1 201 Created
