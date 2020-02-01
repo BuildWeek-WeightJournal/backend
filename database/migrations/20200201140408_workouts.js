@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-  return knex.schema.createTable('workout', table => {
+  return knex.schema.createTable('workouts', table => {
       table.increments();
       table.integer('user_id')
         .unsigned()
@@ -22,5 +22,5 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTableIfExists('workout');
+    .dropTableIfExists('workouts');
 };
