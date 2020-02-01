@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "apidoc -f .js -i ./ -e node_modules -o ./docs"
+    "docs": "apidoc -i ./ -e node_modules -o ./docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
