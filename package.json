@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "docs": "apidoc -i ./ -e node_modules -o ./docs",
+    "build": "apidoc -i ./ -e node_modules -o ./docs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
