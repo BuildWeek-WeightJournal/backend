@@ -11,6 +11,7 @@ server.use(helmet());
 server.use(cors());
 
 server.use('/api/auth', authRouter);
+server.use('/docs', express.static('./docs'));
 
 server.get('/', (req, res) => {
     res.send('This is working!')
