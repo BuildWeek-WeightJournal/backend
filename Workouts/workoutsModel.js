@@ -20,8 +20,8 @@ function findById(id) {
 }
 
 function findByUserId(user_id) {
-    return db('workouts')
-        .where({ user_id });
+    return db('workouts as w')
+        .where('w.user_id', user_id);
 }
 
 function add(workout) {
