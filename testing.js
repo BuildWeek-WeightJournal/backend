@@ -24,7 +24,29 @@
 
 const Workouts = require('./Workouts/workoutsModel');
 
-Workouts.findByUserId(1).then(res => {
+const changes = {
+    name: 'updated workout',
+    reps: 2,
+    weight: 1,
+    body_region: 'arms',
+    user_id: 3
+}
+
+const id = 4;
+
+Workouts.update(changes, id).then(res => {
     console.log(res)
-    process.exit();
+    process.exit()
 })
+
+// Workouts.findById(id)
+//     .then(workout => {
+//         if (workout) {
+//             Workouts.update(changes, id)
+//                 .then(updatedWorkout => {
+//                     console.log(res.json(updatedWorkout))
+//                 })
+//         } else {
+//             return null;
+//         }
+//     })
