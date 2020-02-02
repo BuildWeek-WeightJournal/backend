@@ -1,3 +1,5 @@
+const dateformat = require('dateformat');
+const now = new Date();
 
 exports.up = function(knex) {
   return knex.schema.createTable('workouts', table => {
@@ -16,7 +18,7 @@ exports.up = function(knex) {
       table.string('body_region');
       table.timestamp('date')
         .notNullable()
-        .defaultTo(knex.fn.now());
+        .defaultTo(dateformat(now, "dd/mm/yyyy"));
   })
 };
 
