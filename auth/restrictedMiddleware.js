@@ -10,11 +10,11 @@ module.exports  = (req, res, next) => {
             if(err) {
                 res.status(401).json({ message: 'Invalid token.' })
             } else {
-                req.user = { username: token.username }
+                req.user = { id: token.id, username: token.username }
                 next();
             }
         })
     } else {
-        res.status(401).json({ message: 'Invalid credentials.' })
+        res.status(401).json({ message: 'Unauthorized, login!' })
     }
 }
