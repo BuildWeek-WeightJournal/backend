@@ -5,24 +5,22 @@ const Workouts = require('./workoutsModel');
 const authentication  = require('../auth/restrictedMiddleware');
 
 router.get('/:userId', authentication, (req, res) => {
-	Users.findById(req.params.userId)
-		.then((user) => {
-			if (!user) {
-				res.status(401).json({ error: "user doesn't exist" });
-			} else {
-				Workouts.findByUserId(req.params.userId).then((workouts) => {
-					if (workouts.length === 0) {
-						res.status(400).json({ error: 'no workouts to display' });
-					} else {
-						res.status(200).json(workouts);
-					}
-				});
-			}
-		})
-		.catch((error) => {
-			console.log(error);
-			res.status(500).json({ error: 'error retrieving workouts' });
-		});
+    if(req.user.id.toString() === req.params.userId) {
+        Workouts.findByUserId(req.params.userId)
+        .then((workouts) => {
+            if (workouts.length === 0) {
+                return res.status(400).json({ error: 'no workouts to display' });
+            } else {
+                return res.status(200).json(workouts);
+            }
+        })
+        .catch((error) => {
+            		console.log(error);
+            		res.status(500).json({ error: 'error retrieving workouts' });
+            	});
+    } else {
+        return res.status(400).json({ message: 'Are you logged in to the correct account?' })
+    }
 });
 
 /** 
