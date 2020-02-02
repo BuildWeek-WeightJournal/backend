@@ -13,8 +13,8 @@ server.use(helmet());
 server.use(cors());
 
 server.use('/api/auth', authRouter);
-server.use('/api/users', usersRouter);
-// server.use('/api/workouts', workoutsRouter);
+// server.use('/api/users', usersRouter);
+server.use('/api/workouts', workoutsRouter);
 server.use('/docs', express.static('./docs'));
 
 server.get('/', (req, res) => {

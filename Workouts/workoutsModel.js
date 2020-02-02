@@ -36,8 +36,8 @@ function update(id, changes) {
     return db('workouts')
         .where({ id })
         .update(changes)
-        .then(updated => {
-            return findById(updated);
+        .then(() => {
+            return findById(id);
         })
 }
 
