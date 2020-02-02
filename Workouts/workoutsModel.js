@@ -4,7 +4,9 @@ module.exports = {
     find,
     findById,
     findByUserId,
-    add
+    add,
+    update,
+    remove
 }
 
 function find() {
@@ -28,4 +30,19 @@ function add(workout) {
         .then(([id]) => {
             return findById(id);
         })
+}
+
+function update(id, changes) {
+    return db('workouts')
+        .where({ id })
+        .update(changes)
+        .then(updated => {
+            return findById(updated);
+        })
+}
+
+function remove(id) {
+    return db('workouts')
+        .where({ id })
+        .del();
 }
