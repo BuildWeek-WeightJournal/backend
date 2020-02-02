@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Users = require('../Users/usersModel');
 const Workouts = require('../Workouts/workoutsModel');
 
-router.get('/:id/workouts', (req, res) => {
+router.get('/:userId', (req, res) => {
 	Users.findById(req.params.id)
 		.then((user) => {
 			if (!user) {
@@ -23,7 +23,7 @@ router.get('/:id/workouts', (req, res) => {
 		});
 });
 
-router.post('/:id/workouts', (req, res) => {
+router.post('/:userId', (req, res) => {
     const workout = {...req.body, user_id: req.params.id};
     Users.findById(req.params.id)
         .then((user) => {
@@ -46,7 +46,7 @@ router.post('/:id/workouts', (req, res) => {
         })
 })
 
-router.put('/:id/workouts', (req, res) => {
+router.put('/:userId', (req, res) => {
     Users.findById(req.params.id)
         .then((user) => {
             if (!user) {
