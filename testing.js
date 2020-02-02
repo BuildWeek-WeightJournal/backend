@@ -25,16 +25,16 @@
 const Workouts = require('./Workouts/workoutsModel');
 
 const changes = {
-    name: 'updated updated',
-    reps: 2,
-    weight: 1,
-    body_region: 'dskljflsjfkl;',
+    name: 'updated updated sunday',
+    reps: 20,
+    weight: 100,
+    body_region: 'back',
     user_id: 3
 }
 
 const id = 4;
 
-Workouts.update(5, changes).then(res => {
+Workouts.update(6, changes).then(res => {
     console.log(res)
     process.exit()
 })
