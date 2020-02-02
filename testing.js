@@ -21,3 +21,10 @@
 //         console.log(response)
 //         process.exit();
 //     })
+
+const Workouts = require('./Workouts/workoutsModel');
+
+Workouts.findByUserId(1).then(res => {
+    console.log(res)
+    process.exit();
+})
