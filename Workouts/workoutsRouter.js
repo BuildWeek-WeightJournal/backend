@@ -24,7 +24,7 @@ router.get('/:userId', authentication, (req, res) => {
 });
 
 /** 
- * @api {get} /api/workouts/:usedId GET users workouts
+ * @api {get} /api/workouts/:userId GET users workouts
  * @apiName GET Workout
  * @apiGroup Workouts
  * 
@@ -80,7 +80,7 @@ router.post('/:userId', (req, res) => {
 })
 
 /** 
- * @api {post} /api/workouts/:usedId POST new workout
+ * @api {post} /api/workouts/:userId POST new workout
  * @apiName POST Workout
  * @apiGroup Workouts
  * 
@@ -121,7 +121,7 @@ router.put('/:userId', (req, res) => {
 })
 
 /** 
- * @api {put} /api/workouts/:usedId PUT update workout
+ * @api {put} /api/workouts/:userId PUT update workout
  * @apiName PUT Workout
  * @apiGroup Workouts
  * 
