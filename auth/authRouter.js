@@ -11,13 +11,22 @@ router.post('/register', (req, res) => {
     const hash = bcrypt.hashSync(user.password, 8);
     user.password = hash;
 
-    Users.add(user)
-        .then(saved => {
-            res.status(201).json(saved)
+    const { username } = req.body;
+
+    Users.findBy({ username })
+        .then(username => {
+            if(!username) {
+                Users.add(user)
+                .then(saved => {
+                    return res.status(201).json(saved)
+                })
+            } else {
+                return res.status(400).json({ message: 'User already exists, pick another name.' })
+            }
         })
         .catch(error => {
             console.log(error)
-            res.status(500).json({error: "error registering user"})
+            return res.status(500).json({error: "error registering user"})
         })
 })
 
