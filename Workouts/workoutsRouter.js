@@ -23,6 +23,7 @@ router.get('/:userId', authentication, (req, res) => {
     }
 });
 
+
 /** 
  * @api {get} /api/workouts/:userId GET users workouts
  * @apiName GET Workout
@@ -55,6 +56,22 @@ router.get('/:userId', authentication, (req, res) => {
     },
 ]
  **/
+
+router.get('/workout/:workoutId', (req, res) => {
+        Workouts.findById(req.params.workoutId)
+        .then((workout) => {
+            if (!workout) {
+                return res.status(400).json({ error: 'no workout to display' });
+            } else {
+                return res.status(200).json(workout);
+            }
+        })
+        .catch((error) => {
+            		console.log(error);
+            		res.status(500).json({ error: 'error retrieving workouts' });
+        });
+})
+
 
 router.post('/:userId', (req, res) => {
     const workout = {...req.body, user_id: req.params.userId};
