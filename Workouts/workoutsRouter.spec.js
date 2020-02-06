@@ -4,42 +4,42 @@ const db = require('../database/dbconfig');
 
 describe('workoutsRouter and model', function() {
 	beforeEach(async () => {
-		await db('users').truncate();
+		await db('users').truncate()
 		await db('workouts').truncate();
 	});
 
-	describe('GET /api/workouts/:userId', function() {
-		it('should register new users', function() {
-			return request(server)
-				.post('/api/auth/register')
-				.send({ username: 'user10', password: 'password' })
-				.then(() => {
-					return request(server)
-						.post('/api/auth/login')
-						.send({ username: 'user10', password: 'password' })
-						.then((response) => {
-							const { token } = response.body;
-							return request(server)
-								.get('/api/workouts/1')
-								.set({ authorization: token })
-								.then((response) => {
-									expect(response.body.error).toBe('no workouts to display');
-									expect(response.status).toBe(400);
-								});
-						});
-				});
-		});
-	});
+	// describe('GET /api/workouts/:userId', function() {
+	// 	it('should return no workouts', function() {
+	// 		return request(server)
+	// 			.post('/api/auth/register')
+	// 			.send({ username: 'steve', password: 'password' })
+	// 			.then(() => {
+	// 				return request(server)
+	// 					.post('/api/auth/login')
+	// 					.send({ username: 'steve', password: 'password' })
+	// 					.then((response) => {
+	// 						const { token } = response.body;
+	// 						return request(server)
+	// 							.get('/api/workouts/1')
+	// 							.set({ authorization: token })
+	// 							.then((response) => {
+	// 								expect(response.body.error).toBe('no workouts to display');
+	// 								expect(response.status).toBe(400);
+	// 							});
+	// 					});
+	// 			});
+	// 	});
+	// });
 
 	describe('POST /api/workouts/:userId', function() {
-		it('should register new user', function() {
+		it('should return status code of 201', function() {
 			return request(server)
 				.post('/api/auth/register')
-				.send({ username: 'user10', password: 'password' })
+				.send({ username: 'steve', password: 'password' })
 				.then(() => {
 					return request(server)
 						.post('/api/auth/login')
-						.send({ username: 'user10', password: 'password' })
+						.send({ username: 'steve', password: 'password' })
 						.then((response) => {
 							const { token } = response.body;
 							return request(server)
@@ -62,14 +62,14 @@ describe('workoutsRouter and model', function() {
 	});
 
 	describe('PUT /api/workouts/:userId', function() {
-		it('should update users workout', function() {
+		it('should return status code 200 OK', function() {
 			return request(server)
 				.post('/api/auth/register')
-				.send({ username: 'user10', password: 'password' })
+				.send({ username: 'steve', password: 'password' })
 				.then(() => {
 					return request(server)
 						.post('/api/auth/login')
-						.send({ username: 'user10', password: 'password' })
+						.send({ username: 'steve', password: 'password' })
 						.then((response) => {
 							const { token } = response.body;
 							return request(server)
@@ -103,15 +103,49 @@ describe('workoutsRouter and model', function() {
 		});
 	});
 
-	describe('DELETE /api/workouts/:userId', function() {
-		it('should update users workout', function() {
+	describe('GET /api/workouts/:userId', function() {
+		it('should return status code of 200 OK', function() {
 			return request(server)
 				.post('/api/auth/register')
-				.send({ username: 'user10', password: 'password' })
+				.send({ username: 'steve', password: 'password' })
 				.then(() => {
 					return request(server)
 						.post('/api/auth/login')
-						.send({ username: 'user10', password: 'password' })
+						.send({ username: 'steve', password: 'password' })
+						.then((response) => {
+							const { token } = response.body;
+							return request(server)
+								.post('/api/workouts/1')
+								.set({ authorization: token })
+								.send({
+									user_id: 1,
+									name: 'bench',
+									reps: 10,
+									weight: 150,
+									body_region: 'chest'
+								})
+								.then((response) => {
+									return request(server)
+										.get('/api/workouts/1')
+										.set({ authorization: token })
+										.then(response => {
+											expect(response.status).toBe(200)
+										})
+								});
+						});
+				});
+		});
+	});
+
+	describe('DELETE /api/workouts/:userId', function() {
+		it('should retur status code of 200 OK', function() {
+			return request(server)
+				.post('/api/auth/register')
+				.send({ username: 'steve', password: 'password' })
+				.then(() => {
+					return request(server)
+						.post('/api/auth/login')
+						.send({ username: 'steve', password: 'password' })
 						.then((response) => {
 							const { token } = response.body;
 							return request(server)
